@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=>, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock, Paper, Scissors</title>
 </head>
 <body>
     <script>
@@ -14,15 +14,86 @@
             if (random === 0) {
                 rps="Rock";
             } 
-            else if (random === 2) {
+            else if (random === 1) {
                 rps="Paper";
             }
             else {
                 rps="Scissors"
             }
-            return random;
+            return rps;
         }
-        console.log(getComputerChoice())
+
+        function playRound() {
+            let output;
+            let indicator;
+            let computerSelection = getComputerChoice();
+            let playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
+            if (playerSelection=="rock" && computerSelection=="Scissors") {
+                //output = "You Win! Rock beats Scissors";
+                indicator = "win";
+            }
+            else if (playerSelection=="paper" && computerSelection=="Rock") {
+                //output = "You Win! Paper beats Rock";
+                indicator = "win";
+            }
+            else if (playerSelection=="scissors" && computerSelection=="Paper") {
+                //output = "You Win! Scissors beats Paper";
+                indicator = "win";
+            }
+            else if (playerSelection=="rock" && computerSelection=="Paper") {
+                //output = "You Lose! Paper beats Rock";
+                indicator = "lose";
+            }
+            else if (playerSelection=="paper" && computerSelection=="Scissors") {
+                //output = "You Lose! Scissors beats Paper";
+                indicator = "lose";
+            }
+            else if (playerSelection=="scissors" && computerSelection=="Rock") {
+                //output = "You Lose! Rock beats Scissors";
+                indicator = "lose";
+            }
+            else if (playerSelection=="rock" && computerSelection=="Rock") {
+                //output = "Its a Draw!";
+                indicator = "draw"
+            }
+            else if (playerSelection=="paper" && computerSelection=="Paper") {
+                //output = "Its a Draw!";
+                indicator = "draw"
+            }
+            else if (playerSelection=="scissors" && computerSelection=="Scissors") {
+                //output = "Its a Draw!";
+                indicator = "draw"
+            }
+
+            return indicator;  
+        }
+        
+        function game() {
+            let player = 0;
+            let computer = 0;
+            for(let i = 0; i < 5; i++) {
+                let indicator = playRound();
+                if (indicator === "win") {
+                    player++;
+                }
+                else if (indicator === "lose") {
+                    computer++;
+                }
+            }
+            let winner;
+            if (player > computer) {
+                winner = "Player wins!";
+            }
+            else if (computer > player) {
+                winner = "Computer wins!";
+            }
+            else {
+                winner = "It's a Draw";
+            }
+            return winner;
+        }
+
+        console.log(game());
     </script>
 </body>
 </html>
