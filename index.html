@@ -7,6 +7,13 @@
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
+
+    <div class="buttons">
+        <button id="rock" class="btn">Rock</button>
+        <button id="paper" class="btn">Paper</button>
+        <button id="scissors" class="btn">Scissors</button>
+    </div>
+
     <script>
         function getComputerChoice() {
             let rps;
@@ -23,11 +30,18 @@
             return rps;
         }
 
-        function playRound() {
+        btns = document.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(e){ playRound(this.id)});
+        }
+
+
+
+        function playRound(select) {
             let output;
             let indicator;
             let computerSelection = getComputerChoice();
-            let playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
+            let playerSelection = select;
             if (playerSelection=="rock" && computerSelection=="Scissors") {
                 //output = "You Win! Rock beats Scissors";
                 indicator = "win";
@@ -65,21 +79,12 @@
                 indicator = "draw"
             }
 
-            return indicator;  
+            console.log(indicator);  
         }
         
-        function game() {
-            let player = 0;
-            let computer = 0;
-            for(let i = 0; i < 5; i++) {
-                let indicator = playRound();
-                if (indicator === "win") {
-                    player++;
-                }
-                else if (indicator === "lose") {
-                    computer++;
-                }
-            }
+
+
+        function winner(computer, player) {
             let winner;
             if (player > computer) {
                 winner = "Player wins!";
@@ -93,7 +98,6 @@
             return winner;
         }
 
-        console.log(game());
     </script>
 </body>
 </html>
