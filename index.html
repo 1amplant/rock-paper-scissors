@@ -14,7 +14,23 @@
         <button id="scissors" class="btn">Scissors</button>
     </div>
 
+    <div id="score">
+    <p id="player">Player: 0</p>
+    <p id="computer">Computer: 0</p>
+    </div>
+
+
+
+
     <script>
+        let player = 0;
+        let computer = 0;
+        btns = document.getElementsByClassName("btn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(e){ playRound(this.id)});
+        }
+
+
         function getComputerChoice() {
             let rps;
             let random = Math.floor(Math.random() * 3);
@@ -26,22 +42,29 @@
             }
             else {
                 rps="Scissors"
-            }
+            } 
             return rps;
         }
-
-        btns = document.getElementsByClassName("btn");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function(e){ playRound(this.id)});
-        }
-
-
+        function score(indicator) {
+                if (indicator === "win") {
+                    player++;
+                    document.getElementById("player").innerHTML = "Player: " + player;
+                }
+                else if (indicator === "lose") {
+                    computer++;
+                    document.getElementById("computer").innerHTML = "Computer: " + computer;
+                }
+            
+            }
+                
+        
 
         function playRound(select) {
             let output;
             let indicator;
             let computerSelection = getComputerChoice();
             let playerSelection = select;
+            if (player === 5 || computer === 5) {winner(player, computer);}
             if (playerSelection=="rock" && computerSelection=="Scissors") {
                 //output = "You Win! Rock beats Scissors";
                 indicator = "win";
@@ -68,34 +91,38 @@
             }
             else if (playerSelection=="rock" && computerSelection=="Rock") {
                 //output = "Its a Draw!";
-                indicator = "draw"
+                indicator = "draw";
             }
             else if (playerSelection=="paper" && computerSelection=="Paper") {
                 //output = "Its a Draw!";
-                indicator = "draw"
+                indicator = "draw";
             }
             else if (playerSelection=="scissors" && computerSelection=="Scissors") {
                 //output = "Its a Draw!";
-                indicator = "draw"
+                indicator = "draw";
             }
 
-            console.log(indicator);  
+            score(indicator);
         }
         
 
 
-        function winner(computer, player) {
-            let winner;
+        function winner(player, computer) {
+            const score = document.querySelector('#score');
+
             if (player > computer) {
-                winner = "Player wins!";
+                const declarePlayer = document.createElement('div');
+                declarePlayer.textContent = 'Player wins!!';
+                score.appendChild(declarePlayer);
             }
             else if (computer > player) {
-                winner = "Computer wins!";
+                const declareComputer = document.createElement('div');
+                declareComputer.textContent = 'Computer wins!!';
+                score.appendChild(declareComputer);
             }
-            else {
-                winner = "It's a Draw";
-            }
-            return winner;
+
+            player = 0;
+            computer = 0;
         }
 
     </script>
