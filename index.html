@@ -19,9 +19,6 @@
     <p id="computer">Computer: 0</p>
     </div>
 
-
-
-
     <script>
         let player = 0;
         let computer = 0;
@@ -29,7 +26,6 @@
         for (var i = 0; i < btns.length; i++) {
             btns[i].addEventListener("click", function(e){ playRound(this.id)});
         }
-
 
         function getComputerChoice() {
             let rps;
@@ -46,6 +42,7 @@
             return rps;
         }
         function score(indicator) {
+
                 if (indicator === "win") {
                     player++;
                     document.getElementById("player").innerHTML = "Player: " + player;
@@ -54,6 +51,8 @@
                     computer++;
                     document.getElementById("computer").innerHTML = "Computer: " + computer;
                 }
+
+                if (player === 5 || computer === 5) {winner(player, computer);}
             
             }
                 
@@ -64,43 +63,42 @@
             let indicator;
             let computerSelection = getComputerChoice();
             let playerSelection = select;
-            if (player === 5 || computer === 5) {winner(player, computer);}
+            if (player === 5 || computer === 5) {
+                player = 0;
+                computer = 0;
+                document.getElementById("computer").innerHTML = "Computer: " + computer;
+                document.getElementById("player").innerHTML = "Player: " + player;
+                declare.innerHTML = '';
+            }
+
             if (playerSelection=="rock" && computerSelection=="Scissors") {
-                //output = "You Win! Rock beats Scissors";
                 indicator = "win";
             }
             else if (playerSelection=="paper" && computerSelection=="Rock") {
-                //output = "You Win! Paper beats Rock";
                 indicator = "win";
             }
             else if (playerSelection=="scissors" && computerSelection=="Paper") {
-                //output = "You Win! Scissors beats Paper";
                 indicator = "win";
             }
             else if (playerSelection=="rock" && computerSelection=="Paper") {
-                //output = "You Lose! Paper beats Rock";
                 indicator = "lose";
             }
             else if (playerSelection=="paper" && computerSelection=="Scissors") {
-                //output = "You Lose! Scissors beats Paper";
                 indicator = "lose";
             }
             else if (playerSelection=="scissors" && computerSelection=="Rock") {
-                //output = "You Lose! Rock beats Scissors";
                 indicator = "lose";
             }
             else if (playerSelection=="rock" && computerSelection=="Rock") {
-                //output = "Its a Draw!";
                 indicator = "draw";
             }
             else if (playerSelection=="paper" && computerSelection=="Paper") {
-                //output = "Its a Draw!";
                 indicator = "draw";
             }
             else if (playerSelection=="scissors" && computerSelection=="Scissors") {
-                //output = "Its a Draw!";
                 indicator = "draw";
             }
+
 
             score(indicator);
         }
@@ -108,23 +106,22 @@
 
 
         function winner(player, computer) {
-            const score = document.querySelector('#score');
+            const score = document.querySelector('#score'); 
 
             if (player > computer) {
-                const declarePlayer = document.createElement('div');
-                declarePlayer.textContent = 'Player wins!!';
-                score.appendChild(declarePlayer);
+                const declare = document.createElement('div');
+                declare.textContent = 'Player wins!!';
+                score.appendChild(declare);
             }
             else if (computer > player) {
-                const declareComputer = document.createElement('div');
-                declareComputer.textContent = 'Computer wins!!';
-                score.appendChild(declareComputer);
+                const declare = document.createElement('div');
+                declare.textContent = 'Computer wins!!';
+                score.appendChild(declare);
             }
 
-            player = 0;
-            computer = 0;
         }
 
     </script>
 </body>
+
 </html>
